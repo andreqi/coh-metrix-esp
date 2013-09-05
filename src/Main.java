@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
-import pucp.edu.cohmetrixesp.metrics.DescriptiveAnalyzer;
+import pucp.edu.cohmetrixesp.metrics.ParagraphSplitter;
 import edu.upc.freeling.*;
 
 public class Main {

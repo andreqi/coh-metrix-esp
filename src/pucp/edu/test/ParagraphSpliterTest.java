@@ -11,14 +11,16 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.upc.freeling.Paragraph;
 import edu.upc.freeling.Util;
-import pucp.edu.cohmetrixesp.metrics.DescriptiveAnalyzer;
+import pucp.edu.cohmetrixesp.metrics.CohParagraph;
+import pucp.edu.cohmetrixesp.metrics.ParagraphSplitter;
 
-public class DescriptiveTest {
+public class ParagraphSpliterTest {
 	
 	String small, medium;
 	Properties prop;
-	DescriptiveAnalyzer desc; 
+	ParagraphSplitter p_splitter; 
 
 	@Before
 	public void load_test_files(){
@@ -33,21 +35,16 @@ public class DescriptiveTest {
 			e.printStackTrace();
 		}
 		//System.out.println(prop.getProperty("tok_file"));
-		desc = new DescriptiveAnalyzer(prop);
 		//System.out.println(desc.number_of_words(small));
 	}
 
 	@Test
-	public void number_of_paragraphs() {
-		assertEquals("error - numero distinto de parrafos", 2, desc.number_of_paragraphs(small));
-		assertEquals("error - numero distinto de parrafos", 7, desc.number_of_paragraphs(medium));
+	public void paragraphs_splitting() {
+		p_splitter = new ParagraphSplitter();
+		for (CohParagraph s: p_splitter.split(medium))
+			System.out.println(s.getText() + "/n");
+		assertEquals("error - numero distinto de parrafos", 2, p_splitter.split(small).size());
+		assertEquals("error - numero distinto de parrafos", 6, p_splitter.split(medium).size());
 	}
 	
-	@Test
-	public void number_of_words() {
-		System.out.println(desc);
-		assertEquals("error - numero distinto de palabras", 22, desc.number_of_words(small));
-		assertTrue("error - numero menor de palabras", 160 < desc.number_of_words(medium));
-	}
-
 }

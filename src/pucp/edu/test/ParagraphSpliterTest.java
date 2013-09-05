@@ -40,11 +40,10 @@ public class ParagraphSpliterTest {
 
 	@Test
 	public void paragraphs_splitting() {
-		p_splitter = new ParagraphSplitter();
-		for (CohParagraph s: p_splitter.split(medium))
-			System.out.println(s.getText() + "/n");
-		assertEquals("error - numero distinto de parrafos", 2, p_splitter.split(small).size());
-		assertEquals("error - numero distinto de parrafos", 6, p_splitter.split(medium).size());
+		for (CohParagraph s: ParagraphSplitter.split(medium))
+			System.out.println(s.getText() + "\n\n" );
+		assertEquals("error - numero distinto de parrafos", 2, ParagraphSplitter.split(small).size());
+		assertEquals("error - numero distinto de parrafos", 6, ParagraphSplitter.split(medium).size());
 	}
 	
 }

@@ -1,10 +1,15 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Properties;
 
+import pucp.edu.cohmetrixesp.metrics.CohParagraph;
 import pucp.edu.cohmetrixesp.metrics.ParagraphSplitter;
 import edu.upc.freeling.*;
 
@@ -32,8 +37,6 @@ public class Main {
 				+ "/np.dat", DATA + "common/punct.dat");
 
 		// Create analyzers.
-		LangIdent lgid = new LangIdent(DATA
-				+ "/common/lang_ident/ident-few.dat");
 
 		Tokenizer tk = new Tokenizer(DATA + LANG + "/tokenizer.dat");
 		Splitter sp = new Splitter(DATA + LANG + "/splitter.dat");
@@ -52,249 +55,34 @@ public class Main {
 
 		// Make sure the encoding matches your input text (utf-8, iso-8859-15,
 		// ...)
-		BufferedReader input = null;
+		String text = "";
 		try {
-			input = new BufferedReader(new InputStreamReader(
-					System.in, "utf-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String line = null;
-		try {
-			line = input.readLine();
+			text = new String(Files.readAllBytes(Paths.get("./testfiles/smallFile.txt")));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// Identify language of the text.
-		// Note that this will identify the language, but will NOT adapt
-		// the analyzers to the detected language. All the processing
-		// in the loop below is done by modules for LANG (set to "es" at
-		// the beggining of this class) created above.
-		String lg = lgid.identifyLanguage(line);
-		System.out.println("-------- LANG_IDENT results -----------");
-		System.out
-				.println("Language detected (from first line in text): " + lg);
-
-		while (line != null) {
-			// Extract the tokens from the line of text.
-			ListWord l = tk.tokenize(line);
-
-			// Split the tokens into distinct sentences.
-			ListSentence ls = sp.split(l, false);
-
-			// Perform morphological analysis
-			mf.analyze(ls);
-
-			// Perform part-of-speech tagging.
-//			tg.analyze(ls);
-
-			// Perform named entity (NE) classificiation.
-/*			neclass.analyze(ls);
-
-			sen.analyze(ls);
-			dis.analyze(ls);*/
-			printResults(ls, "tagged");
+		List<CohParagraph> paragraphs = ParagraphSplitter.split(text);
+		for (CohParagraph p : paragraphs) {
+			p.split(tk, sp);
+			System.out.println(p.getText());
+			p.morfological(mf);
+			p.posTagging(tg);
+			p.neClassification(neclass);
+			p.senses(sen);
+			p.disambiguation(dis);
+			p.chunkParsing(parser);
+			p.dependency(dep);
 /*
-			// Chunk parser
+ 			Al parecer el orden de esos analisis es importante
+			mf.analyze(ls);
+			tg.analyze(ls);
+			neclass.analyze(ls);
+			sen.analyze(ls);
+			dis.analyze(ls);
 			parser.analyze(ls);
-			printResults(ls, "parsed");
-
-			// Dependency parser
 			dep.analyze(ls);
-			printResults(ls, "dep");
 */
-			try {
-				line = input.readLine();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
+
 	}
-
-	private static void printSenses(Word w) {
-		String ss = w.getSensesString();
-
-		// The senses for a FreeLing word are a list of
-		// pair<string,double> (sense and page rank). From java, we
-		// have to get them as a string with format
-		// sense:rank/sense:rank/sense:rank
-		// which will have to be splitted to obtain the info.
-		//
-		// Here, we just output it:
-		System.out.print(" " + ss);
-	}
-
-	private static void printResults(ListSentence ls, String format) {
-
-		if (format == "parsed") {
-			System.out.println("-------- CHUNKER results -----------");
-
-			ListSentenceIterator sIt = new ListSentenceIterator(ls);
-			while (sIt.hasNext()) {
-				Sentence s = sIt.next();
-				TreeNode tree = s.getParseTree();
-				printParseTree(0, tree);
-			}
-		} else if (format == "dep") {
-			System.out
-					.println("-------- DEPENDENCY PARSER results -----------");
-
-			ListSentenceIterator sIt = new ListSentenceIterator(ls);
-			while (sIt.hasNext()) {
-				Sentence s = sIt.next();
-				TreeNode tree = s.getParseTree();
-				printParseTree(0, tree);
-			}
-		} else {
-			System.out.println("-------- TAGGER results -----------");
-
-			// get the analyzed words out of ls.
-			ListSentenceIterator sIt = new ListSentenceIterator(ls);
-			while (sIt.hasNext()) {
-				Sentence s = sIt.next();
-				ListWordIterator wIt = new ListWordIterator(s);
-				while (wIt.hasNext()) {
-					Word w = wIt.next();
-
-					System.out.print(w.getForm() + " " + w.getLemma() + " "
-							+ w.getTag());
-					printSenses(w);
-					System.out.println();
-				}
-
-				System.out.println();
-			}
-		}
-	}
-
-	private static void printParseTree(int depth, TreeNode tr) {
-		Word w;
-		TreeNode child;
-		long nch;
-
-		// Indentation
-		for (int i = 0; i < depth; i++) {
-			System.out.print("  ");
-		}
-
-		nch = tr.numChildren();
-
-		if (nch == 0) {
-			// The node represents a leaf
-			if (tr.getInfo().isHead()) {
-				System.out.print("+");
-			}
-			w = tr.getInfo().getWord();
-			System.out.print("(" + w.getForm() + " " + w.getLemma() + " "
-					+ w.getTag());
-			printSenses(w);
-			System.out.println(")");
-		} else {
-			// The node probably represents a tree
-			if (tr.getInfo().isHead()) {
-				System.out.print("+");
-			}
-
-			System.out.println(tr.getInfo().getLabel() + "_[");
-
-			for (int i = 0; i < nch; i++) {
-				child = tr.nthChildRef(i);
-
-				if (child != null) {
-					printParseTree(depth + 1, child);
-				} else {
-					System.err.println("ERROR: Unexpected NULL child.");
-				}
-			}
-			for (int i = 0; i < depth; i++) {
-				System.out.print("  ");
-			}
-
-			System.out.println("]");
-		}
-	}
-
-	private static void printDepTree(int depth, TreeDepnode tr) {
-		TreeDepnode child = null;
-		TreeDepnode fchild = null;
-		Depnode childnode;
-		long nch;
-		int last, min;
-		Boolean trob;
-
-		for (int i = 0; i < depth; i++) {
-			System.out.print("  ");
-		}
-
-		System.out.print(tr.getInfo().getLinkRef().getInfo().getLabel() + "/"
-				+ tr.getInfo().getLabel() + "/");
-
-		Word w = tr.getInfo().getWord();
-
-		System.out.print("(" + w.getForm() + " " + w.getLemma() + " "
-				+ w.getTag());
-		printSenses(w);
-		System.out.print(")");
-
-		nch = tr.numChildren();
-
-		if (nch > 0) {
-			System.out.println(" [");
-
-			for (int i = 0; i < nch; i++) {
-				child = tr.nthChildRef(i);
-
-				if (child != null) {
-					if (!child.getInfo().isChunk()) {
-						printDepTree(depth + 1, child);
-					}
-				} else {
-					System.err.println("ERROR: Unexpected NULL child.");
-				}
-			}
-
-			// Print chunks (in order)
-			last = 0;
-			trob = true;
-
-			// While an unprinted chunk is found, look for the one with lower
-			// chunk_ord value.
-			while (trob) {
-				trob = false;
-				min = 9999;
-
-				for (int i = 0; i < nch; i++) {
-					child = tr.nthChildRef(i);
-					childnode = child.getInfo();
-
-					if (childnode.isChunk()) {
-						if ((childnode.getChunkOrd() > last)
-								&& (childnode.getChunkOrd() < min)) {
-							min = childnode.getChunkOrd();
-							fchild = child;
-							trob = true;
-						}
-					}
-				}
-				if (trob && (child != null)) {
-					printDepTree(depth + 1, fchild);
-				}
-
-				last = min;
-			}
-
-			for (int i = 0; i < depth; i++) {
-				System.out.print("  ");
-			}
-
-			System.out.print("]");
-		}
-
-		System.out.println("");
-	}
-
 }

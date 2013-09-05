@@ -23,14 +23,14 @@ public class ParagraphSplitter {
 	}
 
 	// number of hard returns
-	public List<CohParagraph> split(String text) {
+	static public List<CohParagraph> split(String text) {
 		int prev = -1;
 		ArrayList<CohParagraph> ans = new ArrayList<>();
 		text = text.trim();
 		for (int i = 0; i < text.length(); i++) {
 			if (text.charAt(i) == '\n') {
 				if(prev + 1 < i) {
-					String paragraph = text.substring(prev+1, i-1).trim();
+					String paragraph = text.substring(prev+1, i).trim();
 					if (paragraph.length() == 0) 
 						continue;
 					CohParagraph p = new CohParagraph(paragraph);

@@ -25,6 +25,10 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 	
 	public long numberOfParagraphs(CohText text) {
 		List<CohParagraph> paragraphs = text.getParagraphs();
+		for (CohParagraph p : paragraphs ){
+			System.out.println(p.getText());
+			System.out.println();
+		}
 		return paragraphs.size();
 	}
 	

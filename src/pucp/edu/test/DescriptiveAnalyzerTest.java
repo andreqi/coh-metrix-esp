@@ -59,10 +59,11 @@ public class DescriptiveAnalyzerTest {
 		CohText ctMedium = new CohText(medium);
 		ctSmall.analyze(freeling);
 		ctMedium.analyze(freeling);
-		assertEquals("numero de parrafo distintos", 2,
-				desc.numberOfSentences(ctSmall));
-		assertEquals("numero de parrafo distintos", 6,
+		assertEquals("numero de oraciones distintos", 15,
 				desc.numberOfSentences(ctMedium));
-				
+		assertEquals("numero de oraciones distintos", 3,
+				desc.numberOfSentences(ctSmall));
 	}
+	@Test
+	public void test(){}
 }

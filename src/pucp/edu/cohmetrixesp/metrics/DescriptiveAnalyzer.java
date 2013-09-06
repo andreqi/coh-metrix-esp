@@ -2,6 +2,8 @@ package pucp.edu.cohmetrixesp.metrics;
 
 import java.util.List;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
 import edu.upc.freeling.ListSentence;
 import edu.upc.freeling.ListSentenceIterator;
 import edu.upc.freeling.ListWordIterator;
@@ -82,8 +84,38 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 		return ans;
 	}
 	
-	public double meanNumberOfWords(CohText text) {
-		return 0;
+	public CohStats lenghtParagraphStatistics(CohText text) {
+		CohStats ans = new CohStats();
+		DescriptiveStatistics desc = new DescriptiveStatistics();
+		for (CohParagraph par : text) 
+			desc.addValue(par.length());
+		ans.setMean(desc.getMean());
+		ans.setStdDeviation(desc.getStandardDeviation());
+		return ans;
+	}
+	
+	private boolean isWord(Word w) {
+		return true;
+	}
+	
+	public CohStats NumberOfWordsInSentences(CohText text) {
+		CohStats ans = new CohStats();
+		DescriptiveStatistics desc = new DescriptiveStatistics();
+		for (CohParagraph paragraph: text) {
+			for (Sentence sentence : paragraph) {
+				FreelingWordIterable words = new FreelingWordIterable(sentence);
+				double n = 0;
+				for (Word word : words) {
+					if (isWord(word)) {
+						n += 1;
+					}
+				}
+				desc.addValue(n);
+			}	
+		}
+		ans.setMean(desc.getMean());
+		ans.setStdDeviation(desc.getStandardDeviation());
+		return ans;
 	}
 	
 }

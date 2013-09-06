@@ -1,19 +1,23 @@
 package pucp.edu.cohmetrixesp.metrics;
 
 
+import java.util.Iterator;
+
 import edu.upc.freeling.ChartParser;
 import edu.upc.freeling.DepTxala;
 import edu.upc.freeling.HmmTagger;
 import edu.upc.freeling.ListSentence;
+import edu.upc.freeling.ListSentenceIterator;
 import edu.upc.freeling.ListWord;
 import edu.upc.freeling.Maco;
 import edu.upc.freeling.Nec;
 import edu.upc.freeling.Senses;
+import edu.upc.freeling.Sentence;
 import edu.upc.freeling.Splitter;
 import edu.upc.freeling.Tokenizer;
 import edu.upc.freeling.Ukb;
 
-public class CohParagraph {
+public class CohParagraph implements Iterable<Sentence>{
 	ListSentence sentences;
 	String text;
 	boolean isTitle;
@@ -62,6 +66,33 @@ public class CohParagraph {
 
 	public void posTagging(HmmTagger tg) {
 		tg.analyze(getSentences());
+	}
+
+	@Override
+	public Iterator<Sentence> iterator() {
+
+		return new Iterator<Sentence>() {
+			ListSentenceIterator lsIt = new ListSentenceIterator(sentences);
+			@Override
+			public boolean hasNext() {
+				return lsIt.hasNext();
+			}
+
+			@Override
+			public Sentence next() {
+				return lsIt.next();
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+
+		};
+	}
+
+	public long length() {
+		return text.length();
 	}
 	
 }

@@ -1,5 +1,6 @@
 package pucp.edu.cohmetrixesp.metrics;
 
+import java.util.Iterator;
 import java.util.List;
 
 import edu.upc.freeling.Maco;
@@ -7,7 +8,7 @@ import edu.upc.freeling.Splitter;
 import edu.upc.freeling.Tokenizer;
 
 
-public class CohText {
+public class CohText implements Iterable<CohParagraph> {
 	List<CohParagraph> paragraphs;
 	String text;
 	public CohText(String text) {
@@ -21,9 +22,18 @@ public class CohText {
 		for (CohParagraph p: paragraphs) {
 			p.split(tok, sp);
 			p.morfological(mf);
+			p.posTagging(freeling.getPosTagger());
+			p.neClassification(freeling.getNec());
+			p.senses(freeling.getSenses());
+			p.disambiguation(freeling.getDisambiguator());
+			p.chunkParsing(freeling.getChunkParser());
 		}
 	}
 	List<CohParagraph> getParagraphs() {
 		return paragraphs;
+	}
+	@Override
+	public Iterator<CohParagraph> iterator() {
+		return paragraphs.iterator();
 	}
 }

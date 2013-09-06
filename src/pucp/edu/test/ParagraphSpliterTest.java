@@ -11,8 +11,6 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.upc.freeling.Paragraph;
-import edu.upc.freeling.Util;
 import pucp.edu.cohmetrixesp.metrics.CohParagraph;
 import pucp.edu.cohmetrixesp.metrics.ParagraphSplitter;
 
@@ -21,11 +19,8 @@ public class ParagraphSpliterTest {
 	String small, medium;
 	Properties prop;
 	ParagraphSplitter p_splitter; 
-
 	@Before
 	public void load_test_files(){
-		System.loadLibrary("freeling_javaAPI");
-		Util.initLocale("default");
 		prop = new Properties();
 		try {
 			small = new String(Files.readAllBytes(Paths.get("./testfiles/smallFile.txt")));

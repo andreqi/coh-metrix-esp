@@ -23,4 +23,15 @@ public class CohStats {
 	public void setStdDeviation(double stdDeviation) {
 		this.stdDeviation = stdDeviation;
 	}
+	
+	public String toString () {
+		StringBuilder ans = new StringBuilder();
+		ans.append("[");
+		ans.append("mean: " + mean);
+		ans.append(", ");
+		ans.append("stdDev: " +stdDeviation);
+		ans.append("]");
+		return ans.toString();
+	}
+	
 }

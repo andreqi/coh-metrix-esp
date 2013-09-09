@@ -94,5 +94,18 @@ public class CohParagraph implements Iterable<Sentence>{
 	public long length() {
 		return text.length();
 	}
+
+	public String substring(long spanStart, long spanFinish) {
+		try {
+			//System.out.println(spanStart  + " " + spanFinish);
+			//System.out.println(text);
+			return text.substring((int)spanStart, (int)spanFinish);
+		} catch (Exception e) {
+			System.err.println("error en splitter o tokenizer");
+			//System.out.println(spanStart  + " " + spanFinish);
+		//	System.out.println(text);
+		}
+		return "";
+	}
 	
 }

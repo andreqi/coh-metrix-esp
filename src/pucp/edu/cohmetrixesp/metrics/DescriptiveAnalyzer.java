@@ -27,10 +27,6 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 	
 	public long numberOfParagraphs(CohText text) {
 		List<CohParagraph> paragraphs = text.getParagraphs();
-		for (CohParagraph p : paragraphs ){
-			System.out.println(p.getText());
-			System.out.println();
-		}
 		return paragraphs.size();
 	}
 	
@@ -84,7 +80,7 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 		return ans;
 	}
 	
-	public CohStats lenghtParagraphStatistics(CohText text) {
+	public CohStats lenghtParagraphs(CohText text) {
 		CohStats ans = new CohStats();
 		DescriptiveStatistics desc = new DescriptiveStatistics();
 		for (CohParagraph par : text) 
@@ -95,10 +91,10 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 	}
 	
 	private boolean isWord(Word w) {
-		return true;
+		return !w.getTag().startsWith("F") && !w.getTag().startsWith("Z");
 	}
 	
-	public CohStats NumberOfWordsInSentences(CohText text) {
+	public CohStats numberOfWordsInSentences(CohText text) {
 		CohStats ans = new CohStats();
 		DescriptiveStatistics desc = new DescriptiveStatistics();
 		for (CohParagraph paragraph: text) {
@@ -117,5 +113,55 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 		ans.setStdDeviation(desc.getStandardDeviation());
 		return ans;
 	}
+	
+	public CohStats lengthOfParagraphs(CohText text) {
+		CohStats ans = new CohStats();
+		DescriptiveStatistics desc = new DescriptiveStatistics();
+		for (CohParagraph p: text) {
+			desc.addValue(p.length());
+		}
+		ans.setMean(desc.getMean());
+		ans.setStdDeviation(desc.getStandardDeviation());
+		return ans;
+	}
+	
+	
+	public CohStats numberOfLettersInWords(CohText text) {
+		CohStats ans = new CohStats();
+		DescriptiveStatistics desc = new DescriptiveStatistics();
+		for (CohParagraph paragraph : text) {
+			for (Sentence sentence : paragraph) {
+				FreelingWordIterable sentenceIt = new FreelingWordIterable(sentence);
+				for (Word word : sentenceIt) if (isWord(word)){
+					desc.addValue(word.getSpanFinish()-word.getSpanStart());
+				}
+			}
+		}
+		ans.setMean(desc.getMean());
+		ans.setStdDeviation(desc.getStandardDeviation());
+		return ans;
+	}	
+	
+	long numberOfSyllables(String word) {
+		String CVRep = CohSyllable.getCVRepresentation(word);
+		return SyllableMatcher.getNumberOfSyllable(CVRep);
+	}
+	
+	public CohStats numberOfSyllablesInWords(CohText text) {
+		CohStats ans = new CohStats();
+		DescriptiveStatistics desc = new DescriptiveStatistics();
+		for (CohParagraph paragraph : text) {
+			for (Sentence sentence : paragraph) {
+				FreelingWordIterable sentenceIt = new FreelingWordIterable(sentence);
+				for (Word word : sentenceIt) if (isWord(word)){
+					String strWord = paragraph.substring(word.getSpanStart(), word.getSpanFinish());
+					desc.addValue(numberOfSyllables(strWord));
+				}
+			}
+		}
+		ans.setMean(desc.getMean());
+		ans.setStdDeviation(desc.getStandardDeviation());
+		return ans;
+	}	
 	
 }

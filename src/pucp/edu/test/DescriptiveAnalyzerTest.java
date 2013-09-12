@@ -59,7 +59,7 @@ public class DescriptiveAnalyzerTest {
 	
 	@Test
 	public void numberOfSentencesTest() {
-		assertEquals("numero de oraciones distintos", 15,
+		assertEquals("numero de oraciones distintos", 16,
 				desc.numberOfSentences(ctMedium));
 		assertEquals("numero de oraciones distintos", 3,
 				desc.numberOfSentences(ctSmall));
@@ -70,8 +70,8 @@ public class DescriptiveAnalyzerTest {
 	}
 	@Test
 	public void lenghtParagraphTest(){
-		testStatistics(desc.lenghtParagraphs(ctMedium), new CohStats(1.0, 2.9));
-		testStatistics(desc.lenghtParagraphs(ctSmall), new CohStats(1.0, 2.9));
+		testStatistics(desc.lengthOfParagraphs(ctMedium), new CohStats(1.0, 2.9));
+		testStatistics(desc.lengthOfParagraphs(ctSmall), new CohStats(1.0, 2.9));
 	}
 	@Test
 	public void numberOfWordsInSentencesTest(){

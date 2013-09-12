@@ -1,29 +1,67 @@
 package pucp.edu.cohmetrixesp.metrics;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import edu.upc.freeling.ListSentence;
-import edu.upc.freeling.ListSentenceIterator;
-import edu.upc.freeling.ListWordIterator;
 import edu.upc.freeling.Sentence;
 import edu.upc.freeling.Word;
 
 public class DescriptiveAnalyzer implements ICohAnalyzer{
 	// puede ser util para luego pasarle multiples analysis al texto
 	// aunque deberia devolver un map<keyMetrica, valor>
+	static String NUMBER_OF_PARAGRAPHS = "DESPC";
+	static String NUMBER_OF_SENTENCES = "DESSC";
+	static String NUMBER_OF_WORDS = "DESWC";
+	static String PARAGRAPH_LENGTH_MEAN = "DESPL";
+	static String PARAGRAPH_LENGTH_DEV = "DESPLd";
+	static String NUMBER_OF_WORDS_IN_SENTECES_MEAN = "DESSL";
+	static String NUMBER_OF_WORDS_IN_SENTECES_DEV = "DESSLd";
+	static String NUMBER_OF_SYLLABLES_IN_WORDS_MEAN = "DESWLsy";
+	static String NUMBER_OF_SYLLABLES_IN_WORDS_DEV = "DESWLsyd";
+	
+	static String NUMBER_OF_LETTERS_IN_WORDS_MEAN = "DESWLlt";
+	static String NUMBER_OF_LETTERS_IN_WORDS_DEV = "DESWLltd";
 	static DescriptiveAnalyzer instance;
 	public static DescriptiveAnalyzer getInstance() {
 		if (instance == null) return instance = new DescriptiveAnalyzer();
 		return instance;
 	}
-	DescriptiveAnalyzer() {
-	}
+	
+	private DescriptiveAnalyzer() {}
+
 	@Override
-	public void analyze() {
-		// TODO Auto-generated method stub
-	}	
+	public void analyze(HashMap<String, Double> toFill, CohText text) {
+		CohStats ans = null;
+		double dAns = 0.0;
+		dAns = numberOfParagraphs(text);
+		toFill.put(NUMBER_OF_PARAGRAPHS, dAns);
+		
+		dAns = numberOfSentences(text);
+		toFill.put(NUMBER_OF_SENTENCES, dAns);
+		
+		dAns = numberOfWords(text);
+		toFill.put(NUMBER_OF_WORDS, dAns);
+		
+		ans = lengthOfParagraphs(text);
+		toFill.put(PARAGRAPH_LENGTH_MEAN, ans.getMean());
+		toFill.put(PARAGRAPH_LENGTH_MEAN, ans.getStdDeviation());
+		
+		ans = numberOfWordsInSentences(text);
+		toFill.put(NUMBER_OF_WORDS_IN_SENTECES_MEAN, ans.getMean());
+		toFill.put(NUMBER_OF_WORDS_IN_SENTECES_DEV, ans.getStdDeviation());
+		
+		ans = numberOfSyllablesInWords(text);
+		toFill.put(NUMBER_OF_SYLLABLES_IN_WORDS_MEAN, ans.getMean());
+		toFill.put(NUMBER_OF_SYLLABLES_IN_WORDS_DEV, ans.getStdDeviation());
+			
+		ans = numberOfLettersInWords(text);
+		toFill.put(NUMBER_OF_LETTERS_IN_WORDS_MEAN, ans.getMean());
+		toFill.put(NUMBER_OF_LETTERS_IN_WORDS_DEV, ans.getStdDeviation());
+		
+	}
 	
 	public long numberOfParagraphs(CohText text) {
 		List<CohParagraph> paragraphs = text.getParagraphs();
@@ -49,49 +87,28 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 		long ans = 0;
 		for (CohParagraph p: paragraphs) {
 			ans += numberOfWords(p);
-			
 		}
 		return ans;
 	}
 	
 	public long numberOfWords(CohParagraph p) {
-		ListSentence ls = null;
-		ListSentenceIterator lsIt = null;
-		ListWordIterator lwIt = null; 
-		Sentence sen = null;
-		Word word = null;
-		String tag = null;
 		long ans = 0;
-		lsIt = new ListSentenceIterator(ls);
-		while (lsIt.hasNext()) {
-			sen = lsIt.next();
-			lwIt = new ListWordIterator(sen);
-			while (lwIt.hasNext()) {
-				word = lwIt.next();
-				tag = word.getTag();
-				// sacado de tagset.dat
-				// F : puntuacion
-				// Z : numeros
-				if (tag.startsWith("F") || tag.startsWith("Z"))
-					continue;
-				ans++;
+		for (Sentence s: p) {
+			FreelingWordIterable sIt = new FreelingWordIterable(s);
+			for (Word w: sIt) {
+				if (isWord(w)) {
+					ans++;
+				}
 			}
 		}
 		return ans;
 	}
 	
-	public CohStats lenghtParagraphs(CohText text) {
-		CohStats ans = new CohStats();
-		DescriptiveStatistics desc = new DescriptiveStatistics();
-		for (CohParagraph par : text) 
-			desc.addValue(par.length());
-		ans.setMean(desc.getMean());
-		ans.setStdDeviation(desc.getStandardDeviation());
-		return ans;
-	}
 	
 	private boolean isWord(Word w) {
-		return !w.getTag().startsWith("F") && !w.getTag().startsWith("Z");
+		return !w.getTag().startsWith("F") && 
+			   !w.getTag().startsWith("Z") &&
+			   !w.getTag().startsWith("W");
 	}
 	
 	public CohStats numberOfWordsInSentences(CohText text) {
@@ -155,6 +172,10 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 				FreelingWordIterable sentenceIt = new FreelingWordIterable(sentence);
 				for (Word word : sentenceIt) if (isWord(word)){
 					String strWord = paragraph.substring(word.getSpanStart(), word.getSpanFinish());
+					if (strWord == "") {
+						System.out.println(word.getForm());
+						System.out.println(word.getTag());
+					}
 					desc.addValue(numberOfSyllables(strWord));
 				}
 			}
@@ -162,6 +183,5 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 		ans.setMean(desc.getMean());
 		ans.setStdDeviation(desc.getStandardDeviation());
 		return ans;
-	}	
-	
+	}
 }

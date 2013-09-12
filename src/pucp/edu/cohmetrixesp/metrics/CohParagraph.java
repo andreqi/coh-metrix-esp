@@ -37,7 +37,7 @@ public class CohParagraph implements Iterable<Sentence>{
 	
 	public void split (Tokenizer tok, Splitter sp) {
 		ListWord lw = tok.tokenize(this.text);
-		sentences = sp.split(lw, false);
+		sentences = sp.split(lw, true);
 	}
 
 	public void morfological(Maco mf) {

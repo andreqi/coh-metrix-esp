@@ -15,30 +15,33 @@ import pucp.edu.cohmetrixesp.metrics.CohParagraph;
 import pucp.edu.cohmetrixesp.metrics.ParagraphSplitter;
 
 public class ParagraphSpliterTest {
-	
+
 	String small, medium;
 	Properties prop;
-	ParagraphSplitter p_splitter; 
+	ParagraphSplitter p_splitter;
+
 	@Before
-	public void load_test_files(){
+	public void load_test_files() {
 		prop = new Properties();
 		try {
-			small = new String(Files.readAllBytes(Paths.get("./testfiles/smallFile.txt")));
-			medium = new String(Files.readAllBytes(Paths.get("./testfiles/mediumFile.txt")));
+			small = new String(Files.readAllBytes(Paths
+					.get("./testfiles/smallFile.txt")));
+			medium = new String(Files.readAllBytes(Paths
+					.get("./testfiles/mediumFile.txt")));
 			prop.load(new FileInputStream("config.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//System.out.println(prop.getProperty("tok_file"));
-		//System.out.println(desc.number_of_words(small));
+		// System.out.println(prop.getProperty("tok_file"));
+		// System.out.println(desc.number_of_words(small));
 	}
 
 	@Test
 	public void paragraphs_splitting() {
-		for (CohParagraph s: ParagraphSplitter.split(medium))
-			System.out.println(s.getText() + "\n\n" );
-		assertEquals("error - numero distinto de parrafos", 2, ParagraphSplitter.split(small).size());
-		assertEquals("error - numero distinto de parrafos", 6, ParagraphSplitter.split(medium).size());
+		assertEquals("error - numero distinto de parrafos", 2,
+				ParagraphSplitter.split(small).size());
+		assertEquals("error - numero distinto de parrafos", 6,
+				ParagraphSplitter.split(medium).size());
 	}
-	
+
 }

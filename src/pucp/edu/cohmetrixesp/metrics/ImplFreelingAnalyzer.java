@@ -54,7 +54,7 @@ public class ImplFreelingAnalyzer implements IFreelingAnalyzer {
 
 	@Override
 	public Tokenizer getTokenizer() {
-		if (tk == null) tk = new Tokenizer(DATA + LANG + "/tokenizer.dat");
+		tk = new Tokenizer(DATA + LANG + "/tokenizer.dat");
 		return tk;
 	}
 

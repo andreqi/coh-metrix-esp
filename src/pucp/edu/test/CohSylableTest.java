@@ -16,16 +16,21 @@ public class CohSylableTest {
 		assertEquals("no distingue entre mayusculas y minusculas", "CVCCVCVCVE",
 				CohSyllable.getCVRepresentation("Cerradura"));
 		assertEquals("no detecta las tildes", "CVAE",
-				CohSyllable.getCVRepresentation("li√≥"));
+				CohSyllable.getCVRepresentation("lió"));
 	}
 	@Test
 	public void syllableCountingTest() {
 			assertEquals("mala representancion basica", 4,
 				SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("cerradura")));
 			assertEquals("mala representancion basica", 3,
-				SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("√°ngela")));
+				SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("ángela")));
 			assertEquals("mala representancion basica", 4,
 				SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("cerradura")));
+			assertEquals("mala representancion basica", 3,
+				SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("augurio")));
+			assertEquals("mala representancion basica", 3,
+					SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("augurio")));
+			
 	}
 
 }

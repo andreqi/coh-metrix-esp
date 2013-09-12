@@ -2,11 +2,11 @@ package pucp.edu.cohmetrixesp.metrics;
 
 public class SyllableMatcher {
 	static SyllableMatcher instance;
-
-	static String[] V = { "V", "VC", "VV", "VVC", "A", "AC", "AV", "AVC"  };
-	static String[][] EV = { { "E", "CV", "CCV", "A" }, { "E", "CV", "CCV" },
+	/* TODO: no separar consonantes especiales como br */
+	static String[] V = { "VC", "V", "VV", "VVC", "AC", "A", "AV", "AVC"  };
+	static String[][] EV = {  { "E", "CV", "CCV" },{ "E", "CV", "CCV", "A" },
 			{ "E", "CV", "CCV" }, { "E", "CV", "CCV" },
-			{ "E", "CV", "CCV", "A" }, { "E", "CV", "CCV" },
+			{ "E", "CV", "CCV" },{ "E", "CV", "CCV", "A" }, 
 			{ "E", "CV", "CCV" }, { "E", "CV", "CCV" }
 	};
 
@@ -30,13 +30,24 @@ public class SyllableMatcher {
 
 	public String splitSyllable(String pat, String inicio, String[] pEnd) {
 		String regexIni = "^" + inicio+".*";
-		if (!pat.matches(regexIni))
+		if (!pat.matches(regexIni) && !pat.matches(regexIni.replace('V', 'A')))
 			return null;
+		
 		String tPat = pat.substring(inicio.length());
 		for (String p : pEnd) {
 			regexIni = "^" + p+".*";
-			if (tPat.matches(regexIni))
+			if (tPat.matches(regexIni)){
+				System.out.println(inicio + " " + p);
 				return tPat;
+			}
+			
+			regexIni = "^" + p+".*";
+			regexIni = regexIni.replace('V', 'A');
+			if (tPat.matches(regexIni)){
+				System.out.println(inicio + " " + regexIni);
+				return tPat;
+			}
+
 		}
 		return null;
 	}
@@ -83,6 +94,7 @@ public class SyllableMatcher {
 				}
 				break;
 			}
+			System.out.println(pi);
 			if (into == 0) {
 				// si no cumple ninguna regla, sacar la primera letra como silaba
 				pi = pi.substring(1);

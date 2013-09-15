@@ -1,4 +1,4 @@
-package pucp.edu.cohmetrixesp.metrics;
+package pucp.edu.cohmetrixesp.utils;
 
 import edu.upc.freeling.ChartParser;
 import edu.upc.freeling.HmmTagger;

@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import pucp.edu.cohmetrixesp.metrics.CohSyllable;
-import pucp.edu.cohmetrixesp.metrics.SyllableMatcher;
+import pucp.edu.cohmetrixesp.structs.CohSyllable;
+import pucp.edu.cohmetrixesp.utils.SyllableMatcher;
 
 public class CohSylableTest {
 
@@ -16,7 +16,7 @@ public class CohSylableTest {
 		assertEquals("no distingue entre mayusculas y minusculas", "CVCCVCVCVE",
 				CohSyllable.getCVRepresentation("Cerradura"));
 		assertEquals("no detecta las tildes", "VCCVCVCAVE",
-				CohSyllable.getCVRepresentation("estefan’a"));
+				CohSyllable.getCVRepresentation("estefanï¿½a"));
 	}
 	@Test
 	public void syllableCountingTest() {
@@ -27,9 +27,9 @@ public class CohSylableTest {
 			assertEquals("mala representancion basica", 3,
 				SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("augurio")));
 			assertEquals("mala representancion basica", 5,
-					SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("estefan’a")));
+					SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("estefanï¿½a")));
 			assertEquals("mala representancion basica", 3,
-				SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("‡ngela")));
+				SyllableMatcher.getNumberOfSyllable(CohSyllable.getCVRepresentation("ï¿½ngela")));
 	}
 
 }

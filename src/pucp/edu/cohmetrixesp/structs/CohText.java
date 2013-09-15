@@ -1,8 +1,10 @@
-package pucp.edu.cohmetrixesp.metrics;
+package pucp.edu.cohmetrixesp.structs;
 
 import java.util.Iterator;
 import java.util.List;
 
+import pucp.edu.cohmetrixesp.utils.IFreelingAnalyzer;
+import pucp.edu.cohmetrixesp.utils.ParagraphSplitter;
 import edu.upc.freeling.Maco;
 import edu.upc.freeling.Splitter;
 import edu.upc.freeling.Tokenizer;
@@ -31,7 +33,7 @@ public class CohText implements Iterable<CohParagraph> {
 		}
 	}
 
-	List<CohParagraph> getParagraphs() {
+	public List<CohParagraph> getParagraphs() {
 		return paragraphs;
 	}
 

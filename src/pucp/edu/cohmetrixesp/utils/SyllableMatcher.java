@@ -1,4 +1,4 @@
-package pucp.edu.cohmetrixesp.metrics;
+package pucp.edu.cohmetrixesp.utils;
 
 public class SyllableMatcher {
 	static SyllableMatcher instance;

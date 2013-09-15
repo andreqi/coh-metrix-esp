@@ -11,8 +11,8 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
-import pucp.edu.cohmetrixesp.metrics.CohParagraph;
-import pucp.edu.cohmetrixesp.metrics.ParagraphSplitter;
+import pucp.edu.cohmetrixesp.structs.CohParagraph;
+import pucp.edu.cohmetrixesp.utils.ParagraphSplitter;
 
 public class ParagraphSpliterTest {
 

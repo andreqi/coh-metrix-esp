@@ -5,6 +5,12 @@ import java.util.List;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
+import pucp.edu.cohmetrixesp.structs.CohParagraph;
+import pucp.edu.cohmetrixesp.structs.CohStats;
+import pucp.edu.cohmetrixesp.structs.CohSyllable;
+import pucp.edu.cohmetrixesp.structs.CohText;
+import pucp.edu.cohmetrixesp.structs.FreelingWordIterable;
+import pucp.edu.cohmetrixesp.utils.SyllableMatcher;
 import edu.upc.freeling.ListSentence;
 import edu.upc.freeling.Sentence;
 import edu.upc.freeling.Word;

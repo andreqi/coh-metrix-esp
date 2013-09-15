@@ -1,9 +1,10 @@
-package pucp.edu.cohmetrixesp.metrics;
+package pucp.edu.cohmetrixesp.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import pucp.edu.cohmetrixesp.structs.CohParagraph;
 import edu.upc.freeling.Analysis;
 import edu.upc.freeling.ListAnalysis;
 import edu.upc.freeling.ListSentence;

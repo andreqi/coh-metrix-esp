@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
-import pucp.edu.cohmetrixesp.metrics.CohParagraph;
-import pucp.edu.cohmetrixesp.metrics.ParagraphSplitter;
+import pucp.edu.cohmetrixesp.structs.CohParagraph;
+import pucp.edu.cohmetrixesp.utils.ParagraphSplitter;
 import edu.upc.freeling.*;
 
 public class Main {

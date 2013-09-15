@@ -11,12 +11,12 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
-import pucp.edu.cohmetrixesp.metrics.CohStats;
-import pucp.edu.cohmetrixesp.metrics.CohText;
 import pucp.edu.cohmetrixesp.metrics.DescriptiveAnalyzer;
-import pucp.edu.cohmetrixesp.metrics.IFreelingAnalyzer;
-import pucp.edu.cohmetrixesp.metrics.ImplFreelingAnalyzer;
-import pucp.edu.cohmetrixesp.metrics.ParagraphSplitter;
+import pucp.edu.cohmetrixesp.structs.CohStats;
+import pucp.edu.cohmetrixesp.structs.CohText;
+import pucp.edu.cohmetrixesp.utils.IFreelingAnalyzer;
+import pucp.edu.cohmetrixesp.utils.ImplFreelingAnalyzer;
+import pucp.edu.cohmetrixesp.utils.ParagraphSplitter;
 
 public class DescriptiveAnalyzerTest {
 	DescriptiveAnalyzer desc = DescriptiveAnalyzer.getInstance();

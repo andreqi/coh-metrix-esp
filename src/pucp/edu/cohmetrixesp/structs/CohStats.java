@@ -1,4 +1,4 @@
-package pucp.edu.cohmetrixesp.metrics;
+package pucp.edu.cohmetrixesp.structs;
 
 public class CohStats {
 	double mean, stdDeviation;

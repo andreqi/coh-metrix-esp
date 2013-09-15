@@ -2,21 +2,8 @@ package pucp.edu.cohmetrixesp.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import pucp.edu.cohmetrixesp.structs.CohParagraph;
-import edu.upc.freeling.Analysis;
-import edu.upc.freeling.ListAnalysis;
-import edu.upc.freeling.ListSentence;
-import edu.upc.freeling.ListSentenceIterator;
-import edu.upc.freeling.ListWord;
-import edu.upc.freeling.ListWordIterator;
-import edu.upc.freeling.Maco;
-import edu.upc.freeling.MacoOptions;
-import edu.upc.freeling.Sentence;
-import edu.upc.freeling.Splitter;
-import edu.upc.freeling.Tokenizer;
-import edu.upc.freeling.Word;
 
 public class ParagraphSplitter {
 

@@ -1,17 +1,15 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Properties;
 
 import pucp.edu.cohmetrixesp.structs.CohParagraph;
 import pucp.edu.cohmetrixesp.utils.ParagraphSplitter;
-import edu.upc.freeling.*;
+import edu.upc.freeling.Maco;
+import edu.upc.freeling.MacoOptions;
+import edu.upc.freeling.Splitter;
+import edu.upc.freeling.Tokenizer;
+import edu.upc.freeling.Util;
 
 public class Main {
 	private static final String FREELINGDIR = "/usr/local";

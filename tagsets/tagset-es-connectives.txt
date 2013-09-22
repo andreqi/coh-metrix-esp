@@ -1,0 +1,166 @@
+a causa de
+C
+a continuación
+P
+a diferencia de
+A
+a medida que
+T
+a pesar de
+A
+además
+P
+adicionalmente
+P
+agregando a lo anterior
+P
+al mismo tiempo
+T
+al principio
+T
+antes
+T
+así mismo
+P
+así pues
+P
+aun sí
+A
+aunque
+A
+como consecuencia
+C
+como resultado
+C
+con anterioridad
+T
+considerando que
+C
+contrariamente
+A
+cuando
+T
+dado que
+C
+de igual manera
+P
+de modo que
+C
+de nuevo
+T
+de otro modo
+A
+debido a
+C
+después
+T
+durante
+T
+e
+LP
+en adelante
+T
+en cambio
+A
+en conclusión
+T
+en consecuencia
+C
+en contraste con
+A
+en otro sentido
+A
+en primer lugar
+T
+en segundo lugar
+T
+en vez de
+A
+entonces
+CT
+entre tanto
+T
+finalmente
+T
+igualmente
+P
+incluyendo
+P
+inversamente
+A
+luego
+T
+mientras
+A
+más adelante
+T
+más tarde
+T
+ni
+P
+no obstante
+A
+o
+L
+otra vez
+T
+para concluir
+T
+para terminar
+T
+pero
+A
+por consiguiente
+C
+por el contrario
+A
+por esta razón
+C
+por este motivo
+C
+por lo tanto
+C
+por otra parte
+A
+por otro lado
+A
+por último
+T
+porque
+C
+posteriormente
+T
+previamente
+T
+primeramente
+T
+puesto que
+C
+seguidamente
+T
+si bien
+A
+simultáneamente
+T
+sin embargo
+A
+sino
+A
+también
+P
+tampoco
+P
+tan pronto como
+T
+teniendo en cuenta
+C
+u
+L
+una vez que
+T
+visto que
+C
+y
+LP
+ya que
+C

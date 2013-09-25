@@ -1,7 +1,7 @@
 package pucp.edu.cohmetrixesp.metrics;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
@@ -39,7 +39,7 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 	private DescriptiveAnalyzer() {}
 
 	@Override
-	public void analyze(HashMap<String, Double> toFill, CohText text) {
+	public void analyze(Map<String, Double> toFill, CohText text) {
 		CohStats ans = null;
 		double dAns = 0.0;
 		dAns = numberOfParagraphs(text);

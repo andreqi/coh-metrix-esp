@@ -37,14 +37,12 @@ public class SyllableMatcher {
 		for (String p : pEnd) {
 			regexIni = "^" + p+".*";
 			if (tPat.matches(regexIni)){
-				System.out.println(inicio + " " + p);
 				return tPat;
 			}
 			
 			regexIni = "^" + p+".*";
 			regexIni = regexIni.replace('V', 'A');
 			if (tPat.matches(regexIni)){
-				System.out.println(inicio + " " + regexIni);
 				return tPat;
 			}
 
@@ -94,7 +92,6 @@ public class SyllableMatcher {
 				}
 				break;
 			}
-			System.out.println(pi);
 			if (into == 0) {
 				// si no cumple ninguna regla, sacar la primera letra como silaba
 				pi = pi.substring(1);

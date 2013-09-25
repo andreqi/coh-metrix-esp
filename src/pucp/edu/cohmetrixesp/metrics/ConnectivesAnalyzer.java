@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import edu.upc.freeling.ListSentence;
@@ -50,7 +51,7 @@ public class ConnectivesAnalyzer implements ICohAnalyzer {
 	}
 	
 	@Override
-	public void analyze(HashMap<String, Double> toFill, CohText text) {
+	public void analyze(Map<String, Double> toFill, CohText text) {
 		double dAns = 0.0 ;
 		dAns = allConnectivesIncidence( text ) ;
 		toFill.put( ALL_CONECTIVES_INCIDENCE , dAns ) ;
@@ -156,4 +157,5 @@ public class ConnectivesAnalyzer implements ICohAnalyzer {
 		resp /= INCIDENCE ;
 		return resp ;
 	}
+
 }

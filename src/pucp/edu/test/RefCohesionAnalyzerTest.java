@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.junit.Before;
@@ -49,8 +51,12 @@ public class RefCohesionAnalyzerTest {
 
 	@Test
 	public void test() {
-		assertEquals( 1. , ref.meanNounOverlapLocal( ctSmall ) , 1E-9 ) ;
-		assertEquals( 1. , ref.meanNounOverlapGlobal( ctSmall ) , 1E-9 ) ;
+		assertEquals( 1. , ref.nounOverlapLocal( ctSmall ) , 1E-9 ) ;
+		assertEquals( 1. , ref.nounOverlapGlobal( ctSmall ) , 1E-9 ) ;
+		HashMap<String, Double> hash = new HashMap<>();
+		ref.analyze(hash,ctMedium);
+		for (Entry<String, Double> e: hash.entrySet())
+			System.out.println(e.getKey() + " " + e.getValue());
 	}
 
 }

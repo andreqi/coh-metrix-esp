@@ -19,7 +19,12 @@ public class MetricsEngine {
 	private RefCohesionAnalyzer ref = RefCohesionAnalyzer.getInstance();
 	private ConnectivesAnalyzer con = ConnectivesAnalyzer.getInstance();
 	private DescriptiveAnalyzer desc = DescriptiveAnalyzer.getInstance();
-
+	private LexicalDiversityAnalyzer lex = LexicalDiversityAnalyzer.getInstance();
+	private SyntacticComplexityAnalyzer sca = SyntacticComplexityAnalyzer.getInstance();
+	private SyntacticPDAnalyzer spda = SyntacticPDAnalyzer.getInstance();
+	private WordInformationAnalyzer wi = WordInformationAnalyzer.getInstance();
+	private ReadabilityAnalyzer read = ReadabilityAnalyzer.getInstance();
+	private TextEasabilityAnalizer tex = TextEasabilityAnalizer.getInstance();
 	private MetricsEngine(){
 	}
 	
@@ -37,6 +42,12 @@ public class MetricsEngine {
 		System.out.println(t1 - t);
 		con.analyze(ans, ctxt);
 		desc.analyze(ans, ctxt);
+		lex.analyze(ans, ctxt);
+		sca.analyze(ans, ctxt);
+		spda.analyze(ans, ctxt);
+		wi.analyze(ans, ctxt);
+		read.analyze(ans, ctxt);
+		tex.analyze(ans, ctxt);
 		return ans;
 	}
 	

@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import edu.upc.freeling.ParseTree;
 import edu.upc.freeling.Sentence;
+import edu.upc.freeling.TreeNode;
 import edu.upc.freeling.Word;
 import pucp.edu.cohmetrixesp.structs.CohParagraph;
 import pucp.edu.cohmetrixesp.structs.CohText;
@@ -15,6 +17,7 @@ public class LexicalDiversityAnalyzer implements ICohAnalyzer{
 	static private LexicalDiversityAnalyzer instance = new LexicalDiversityAnalyzer();
 	private String TYPE_TOKEN_CONTENT = "LDTTRc";
 	private String TYPE_TOKEN_ALL = "LDTTRa";
+	private char [] banContent = "ZWFIC".toCharArray();
 
 	public static LexicalDiversityAnalyzer getInstance() {
 		return instance;
@@ -31,6 +34,12 @@ public class LexicalDiversityAnalyzer implements ICohAnalyzer{
 	}
 	
 	boolean isContentWord(Word w){
+		//Z-W-F-I-C
+		String tag = w.getTag();
+		for (char c : banContent) {
+			if (tag.length() == 0) continue;
+			if (tag.charAt(0) == c) return false;
+		}
 		return true;
 	}
 	

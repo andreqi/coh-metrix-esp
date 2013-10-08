@@ -29,7 +29,7 @@ public class CohText implements Iterable<CohParagraph> {
 			//p.neClassification(freeling.getNec());
 			//p.senses(freeling.getSenses());
 			//p.disambiguation(freeling.getDisambiguator());
-			//p.chunkParsing(freeling.getChunkParser());
+			p.chunkParsing(freeling.getChunkParser());
 		}
 	}
 

@@ -2,7 +2,11 @@ package pucp.edu.cohmetrixesp.metrics;
 
 import java.util.Map;
 
+import edu.upc.freeling.Sentence;
+import edu.upc.freeling.Word;
+import pucp.edu.cohmetrixesp.structs.CohParagraph;
 import pucp.edu.cohmetrixesp.structs.CohText;
+import pucp.edu.cohmetrixesp.structs.FreelingWordIterable;
 
 public class ReadabilityAnalyzer implements ICohAnalyzer {
 
@@ -23,8 +27,18 @@ public class ReadabilityAnalyzer implements ICohAnalyzer {
 	
 	public double fleshFernandezFormula(CohText text) {
 		double avgSyllables = desc.numberOfSyllablesInWords(text).getMean();
-		double avgWords = desc.numberOfWordsInSentences(text).getMean();
-		double ans = 206.84  - 0.6 * avgSyllables -1.02 * avgWords;		
+		//double avgWords = desc.numberOfWordsInSentences(text).getMean();
+		double avgSentences = 0, words = 0;
+		for (CohParagraph p: text) {
+			for (Sentence s: p) {
+				avgSentences++;
+				for (Word w : new FreelingWordIterable(s)) {
+					words++;
+				}
+			}
+		}
+		if (words != 0) avgSentences /= words;
+		double ans = 206.84 - 60 * avgSyllables - 102 * avgSentences;		
 		return ans;
 	}
 

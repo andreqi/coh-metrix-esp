@@ -61,6 +61,7 @@ public class MetricsEngine {
 		for (File f: files) {
 			if (f.isFile()) {
 				if(f.getName().startsWith("Texto") && f.getName().endsWith("txt")) {
+					System.out.println(f.getName());
 					ans ++;
 					File ansFile = new File(ansDir + "Metrics_" + f.getName());
 					try {

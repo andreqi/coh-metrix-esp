@@ -20,7 +20,7 @@ public class Main {
 	static public void main(String[] args) {
 		MetricsEngine engine = MetricsEngine.getInstance();
 		engine.process(
-				"/home/andre/Dropbox/Coh-Metrix-Esp/Entregables/Tesis 2/Corpus/Lengua extranjera/txt",
-				"/home/andre/Desktop/2do Round - Lengua extrajera/");
+				"/home/andre/Dropbox/Coh-Metrix-Esp/Entregables/Tesis 2/Corpus/Cuentos/txt",
+				"/home/andre/Desktop/2do Round/");
 	}
 }

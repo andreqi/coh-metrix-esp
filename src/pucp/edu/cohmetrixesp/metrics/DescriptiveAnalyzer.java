@@ -179,8 +179,8 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 				for (Word word : sentenceIt) if (isWord(word)){
 					String strWord = paragraph.substring(word.getSpanStart(), word.getSpanFinish());
 					if (strWord == "") {
-						System.out.println(word.getForm());
-						System.out.println(word.getTag());
+					//	System.out.println(word.getForm());
+					//	System.out.println(word.getTag());
 					}
 					desc.addValue(numberOfSyllables(strWord));
 				}

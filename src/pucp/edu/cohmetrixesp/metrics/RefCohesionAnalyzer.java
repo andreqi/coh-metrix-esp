@@ -228,16 +228,14 @@ public class RefCohesionAnalyzer implements ICohAnalyzer {
 	private CohStats iterateOverAllPairsOfSentences(CohText text,
 			SentenceTester tester) {
 		DescriptiveStatistics stats = new DescriptiveStatistics();
-		CohParagraph prev = null;
 		for (CohParagraph p1 : text) {
-			if (prev != null) {
+			for (CohParagraph p2: text) {
 				for (Sentence s1 : p1) {
-					for (Sentence s2: prev){
-					 stats.addValue(tester.sameFeature(s1, s2));
+					for (Sentence s2: p2){
+						stats.addValue(tester.sameFeature(s1, s2));
 					}
 				}
 			}
-			prev = p1;
 		}
 		CohStats ans = new CohStats(stats.getMean(),
 		stats.getStandardDeviation());

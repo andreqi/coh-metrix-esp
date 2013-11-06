@@ -8,6 +8,7 @@ import spark.*;
 public class Main {
 
 	static public void main(String[] args) {
+
 		final MetricsEngine engine = MetricsEngine.getInstance();
 		
 	    post(new Route("/") {

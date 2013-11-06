@@ -1,26 +1,43 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import pucp.edu.cohmetrixesp.metrics.MetricsEngine;
-import pucp.edu.cohmetrixesp.structs.CohParagraph;
-import pucp.edu.cohmetrixesp.utils.ParagraphSplitter;
-import edu.upc.freeling.Maco;
-import edu.upc.freeling.MacoOptions;
-import edu.upc.freeling.Splitter;
-import edu.upc.freeling.Tokenizer;
-import edu.upc.freeling.Util;
+import static spark.Spark.*;
+import spark.*;
 
 public class Main {
-	private static final String FREELINGDIR = "/usr/local";
-	private static final String DATA = FREELINGDIR + "/share/freeling/";
-	private static final String LANG = "es";
 
 	static public void main(String[] args) {
-		MetricsEngine engine = MetricsEngine.getInstance();
-		engine.process(
+		final MetricsEngine engine = MetricsEngine.getInstance();
+		
+	    post(new Route("/") {
+	         @Override
+	         public Object handle(Request request, Response response) {
+	        	 Map<String, Double> ans = engine.analyze("negro del averno porque esto no funciona, eres un pendejo");
+	        	 StringBuilder builder = new StringBuilder();
+	        	 builder.append('[');
+	        	 boolean first = true;
+	        	 for (Entry<String, Double> e : ans.entrySet()) {
+	        		 if (first) first = false;
+	        		 else		builder.append(", ");
+	        		 builder.append("{\"");
+	        		 builder.append(e.getKey());
+	        		 builder.append("\": ");
+	        		 if (e.getValue().isNaN()) 
+	        			 builder.append(0);
+	        		 else
+	        			 builder.append(e.getValue());
+	        		 builder.append('}');
+	        	 }
+	        	 builder.append(']');
+	        	 return builder.toString();
+	         }
+	      });
+		
+		/*
+		 * engine.process(
 				"/home/andre/Dropbox/Coh-Metrix-Esp/Entregables/Tesis 2/Corpus/Lengua extranjera/txt",
 				"/home/andre/Desktop/2do Round - Lengua extrajera/");
+				*/
 	}
 }

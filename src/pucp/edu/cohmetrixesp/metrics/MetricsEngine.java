@@ -36,10 +36,7 @@ public class MetricsEngine {
 		Map<String, Double> ans = new HashMap<>();
 		CohText ctxt = new CohText(text);
 		ctxt.analyze(freeling);
-		long t = System.currentTimeMillis();
 		ref.analyze(ans, ctxt);
-		long t1 = System.currentTimeMillis();
-		System.out.println(t1 - t);
 		con.analyze(ans, ctxt);
 		desc.analyze(ans, ctxt);
 		lex.analyze(ans, ctxt);
@@ -48,6 +45,46 @@ public class MetricsEngine {
 		wi.analyze(ans, ctxt);
 		read.analyze(ans, ctxt);
 		tex.analyze(ans, ctxt);
+		return ans;
+	}
+	
+	public Map<String, Map<String, Double>> analyzeClasified(String text) {
+		Map <String, Map<String, Double>> ans = new HashMap<>();
+		CohText ctxt = new CohText(text);
+		ctxt.analyze(freeling);
+		
+		Map<String, Double> refmap = new HashMap<>();
+		ref.analyze(refmap, ctxt);
+		ans.put("Referential Cohesion", refmap);
+		
+		Map<String, Double> conmap = new HashMap<>();
+		con.analyze(conmap, ctxt);
+		ans.put("Connectives", conmap);
+		
+		Map<String, Double> descmap = new HashMap<>();
+		desc.analyze(descmap, ctxt);
+		ans.put("Descriptives", descmap);
+		
+		Map<String, Double> lexmap = new HashMap<>();
+		lex.analyze(lexmap, ctxt);
+		ans.put("Lexical Diversity", lexmap);
+		
+		Map<String, Double> scamap = new HashMap<>();
+		sca.analyze(scamap, ctxt);
+		ans.put("Syntactic Complexity", scamap);
+		
+		Map<String, Double> spdamap = new HashMap<>();
+		spda.analyze(spdamap, ctxt);
+		ans.put("Syntactic Pattern Density", spdamap);
+		
+		Map<String, Double> wimap = new HashMap<>();
+		wi.analyze(wimap, ctxt);
+		ans.put("Word Information", wimap);
+		
+		Map<String, Double> readmap = new HashMap<>();
+		read.analyze(readmap, ctxt);
+		ans.put("Readability", readmap);
+		
 		return ans;
 	}
 	

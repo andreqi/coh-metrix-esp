@@ -1,40 +1,34 @@
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
+import pucp.edu.classifier.ComplexityClassifier;
 import pucp.edu.cohmetrixesp.metrics.MetricsEngine;
 import static spark.Spark.*;
 import spark.*;
+
+import com.google.gson.Gson;
 
 public class Main {
 
 	static public void main(String[] args) {
 
 		final MetricsEngine engine = MetricsEngine.getInstance();
-		
+		final ComplexityClassifier classifier = ComplexityClassifier.getInstance();
 	    post(new Route("/") {
 	         @Override
 	         public Object handle(Request request, Response response) {
-	        	 Map<String, Double> ans = engine.analyze("negro del averno porque esto no funciona, eres un pendejo");
-	        	 StringBuilder builder = new StringBuilder();
-	        	 builder.append('[');
-	        	 boolean first = true;
-	        	 for (Entry<String, Double> e : ans.entrySet()) {
-	        		 if (first) first = false;
-	        		 else		builder.append(", ");
-	        		 builder.append("{\"");
-	        		 builder.append(e.getKey());
-	        		 builder.append("\": ");
-	        		 if (e.getValue().isNaN()) 
-	        			 builder.append(0);
-	        		 else
-	        			 builder.append(e.getValue());
-	        		 builder.append('}');
-	        	 }
-	        	 builder.append(']');
-	        	 return builder.toString();
+	        	// System.out.println(request.queryParams("text"));
+	        	 String texto = request.queryParams("text");
+	        	 Map<String, Map<String, Double>> ans = engine.analyzeClasified(texto);
+	        	 String class_ = classifier.classify(ans);
+	        	 Gson gson = new Gson();
+	        	 Map<String, Object> ret = new HashMap<String, Object> ();
+	        	 ret.put("metrics", ans);
+	        	 ret.put("class", class_);
+	        	 return gson.toJson(ret);
 	         }
-	      });
-		
+	    });
+	    
 		/*
 		 * engine.process(
 				"/home/andre/Dropbox/Coh-Metrix-Esp/Entregables/Tesis 2/Corpus/Lengua extranjera/txt",

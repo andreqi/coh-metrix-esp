@@ -211,14 +211,17 @@ public class RefCohesionAnalyzer implements ICohAnalyzer {
 			SentenceTester tester) {
 		Sentence prev = null;
 		SummaryStatistics stats = new SummaryStatistics();
+		boolean hay = false;
 		for (CohParagraph p : text) {
 			for (Sentence s : p) {
 				if (prev != null) {
 					stats.addValue(tester.sameFeature(prev, s));
+					hay = true;
 				}
 				prev = s;
 			}
 		}
+		if (!hay) return new CohStats(0, 0);
 		CohStats ans = new CohStats();
 		ans.setMean(stats.getMean());
 		ans.setStdDeviation(stats.getStandardDeviation());
@@ -228,15 +231,18 @@ public class RefCohesionAnalyzer implements ICohAnalyzer {
 	private CohStats iterateOverAllPairsOfSentences(CohText text,
 			SentenceTester tester) {
 		DescriptiveStatistics stats = new DescriptiveStatistics();
+		boolean hay = false;
 		for (CohParagraph p1 : text) {
 			for (CohParagraph p2: text) {
 				for (Sentence s1 : p1) {
 					for (Sentence s2: p2){
 						stats.addValue(tester.sameFeature(s1, s2));
+						hay = true;
 					}
 				}
 			}
 		}
+		if (!hay) return new CohStats(0, 0);
 		CohStats ans = new CohStats(stats.getMean(),
 		stats.getStandardDeviation());
 		return ans;

@@ -18,17 +18,17 @@ import java.util.Map.Entry;
 public class ComplexityClassifier {
 	private static ComplexityClassifier instance = new ComplexityClassifier();
 	private Classifier classifier;
-
+	private Instances trainData;
 
 	String routePath = "./files/classifier.arff";
 	
 	private ComplexityClassifier () {
 		try {
 			 DataSource source = new DataSource(routePath);
-			 Instances data = source.getDataSet();
-			 data.setClassIndex(data.numAttributes() - 1);
+			 trainData = source.getDataSet();
+			 trainData.setClassIndex(trainData.numAttributes() - 1);
 			 classifier = new SMO();
-			 classifier.buildClassifier(data);
+			 classifier.buildClassifier(trainData);
 		} catch (Exception e ) {
 			e.printStackTrace();
 		}
@@ -38,43 +38,40 @@ public class ComplexityClassifier {
 		return instance;
 	}
 	
-	public Instances makeInstance(Map<String, Map<String, Double>> metrics) {
-		ArrayList<Attribute> attributeList = new ArrayList<>();
-		for (Entry<String, Map<String, Double>> type : metrics.entrySet()) {
-			for (Entry<String, Double> e : type.getValue().entrySet()) {
-				attributeList.add( new Attribute(e.getKey()));
-			}
-		}
-		ArrayList<String> classVal = new ArrayList<>();
-		classVal.add("simple");
-		classVal.add("complejo");
-		attributeList.add( new Attribute("class", classVal));
+	public String classifyText(Map<String, Map<String, Double>> metrics) throws Exception {
+				
+		Instances unlabeled = new Instances(trainData, 1);
+		unlabeled.setClassIndex(trainData.classIndex());
 		
-		Instances data = new Instances("CohMetrix", attributeList, 0);
-		data.setClassIndex(data.numAttributes()-1);
-		Instance ans = new DenseInstance(data.numAttributes());
-		data.add(ans);
-		int i = 0;
+		Instance cur = new DenseInstance(unlabeled.numAttributes());
+		cur.setDataset(unlabeled);
+		
 		for (Entry<String, Map<String, Double>> type : metrics.entrySet()) {
 			for (Entry<String, Double> e : type.getValue().entrySet()) {
-				ans.setValue(attributeList.get(i++), e.getValue());;
+				cur.setValue(unlabeled.attribute(e.getKey()), e.getValue());
 			}
 		}
 		
-		return data;
+		unlabeled.add(cur);
+		cur.setMissing(unlabeled.numAttributes()-1);;
+		Instances labeled = new Instances(unlabeled);
+		
+		double clsLabel = classifier.classifyInstance(unlabeled.instance(0));
+		labeled.instance(0).setClassValue(clsLabel);
+		
+		return labeled.instance(0).stringValue(unlabeled.numAttributes()-1);
 	}
 	
 	public String classify(Map<String, Map<String,Double>> metrics) {
-		Instances curText = makeInstance(metrics);
-		double index = 0;
+		String clase = "error";
 		try {
-			index = classifier.classifyInstance(curText.firstInstance());
+			 clase = classifyText(metrics);
 		} catch (Exception e) {
 			System.out.println("Error en el clasificador");
 			e.printStackTrace();
 		}
 		//curText.setClassValue(index);
 		
-		return curText.classAttribute().value((int)index);
+		return clase;
 	}
 }

@@ -1,6 +1,9 @@
-coh-metrix-esp
+Coh-Metrix-Esp
 ==============
 
-Automatizacion de calculo de metricas psicolinguisticas para el idioma espanol (Adaptacion coh-metrix-3.0)
+Cálculo automatizado de métricas psicolinguísticas para el idioma español (Adaptado de Coh-Metrix 3.0)
 
 Utiliza freeling (http://nlp.lsi.upc.edu/freeling/)
+
+Paper:
+http://www.lrec-conf.org/proceedings/lrec2016/pdf/1115_Paper.pdf

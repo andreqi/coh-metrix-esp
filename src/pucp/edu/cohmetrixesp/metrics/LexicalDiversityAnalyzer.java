@@ -1,12 +1,9 @@
 package pucp.edu.cohmetrixesp.metrics;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import edu.upc.freeling.ParseTree;
 import edu.upc.freeling.Sentence;
-import edu.upc.freeling.TreeNode;
 import edu.upc.freeling.Word;
 import pucp.edu.cohmetrixesp.structs.CohParagraph;
 import pucp.edu.cohmetrixesp.structs.CohText;

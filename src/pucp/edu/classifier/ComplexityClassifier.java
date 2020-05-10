@@ -1,10 +1,6 @@
 package pucp.edu.classifier;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
 
 import weka.core.*;
@@ -12,7 +8,6 @@ import weka.core.converters.ConverterUtils.DataSource;
 import weka.classifiers.Classifier;
 import weka.classifiers.functions.SMO;
 
-import java.util.ArrayList;
 import java.util.Map.Entry;
 
 public class ComplexityClassifier {
@@ -20,11 +15,12 @@ public class ComplexityClassifier {
 	private Classifier classifier;
 	private Instances trainData;
 
-	String routePath = "./files/classifier.arff";
+	String routePath = "/classifier.arff";
 	
 	private ComplexityClassifier () {
 		try {
-			 DataSource source = new DataSource(routePath);
+			 InputStream res = ComplexityClassifier.class.getResourceAsStream(routePath);
+			 DataSource source = new DataSource(res);
 			 trainData = source.getDataSet();
 			 trainData.setClassIndex(trainData.numAttributes() - 1);
 			 classifier = new SMO();

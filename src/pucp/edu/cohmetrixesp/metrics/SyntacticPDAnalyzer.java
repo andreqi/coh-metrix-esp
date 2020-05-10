@@ -1,10 +1,8 @@
 package pucp.edu.cohmetrixesp.metrics;
 
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-
 import edu.upc.freeling.Sentence;
-import edu.upc.freeling.TreeNode;
+import edu.upc.freeling.TreeOfNode;
 import pucp.edu.cohmetrixesp.structs.CohParagraph;
 import pucp.edu.cohmetrixesp.structs.CohText;
 
@@ -34,18 +32,18 @@ public class SyntacticPDAnalyzer implements ICohAnalyzer {
 		toFill.put(VERB_PHRASE_INCIDENCE, verbalPhraseIncidence(text));
 	}
 
-	int countNodes(TreeNode node, String tag) {
+	int countNodes(TreeOfNode node, String tag) {
 		long nch = node.numChildren();
 		if (nch == 0) {
-			return (node.getInfo()
+			return (node.begin()
 					   .getWord()
 					   .getTag()
 					   .startsWith(tag)) ? 1 : 0;
 		}
-		if (node.getInfo().getLabel().startsWith(tag))
+		if (node.begin().getLabel().startsWith(tag))
 			return 1;
 		int ans = 0;
-		TreeNode next = null;
+		TreeOfNode next = null;
 		for (int i = 0; i < nch; i++) {
 			next = node.nthChildRef(i);
 			ans += countNodes(next, tag);

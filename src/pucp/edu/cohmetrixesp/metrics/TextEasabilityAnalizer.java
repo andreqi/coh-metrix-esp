@@ -1,6 +1,5 @@
 package pucp.edu.cohmetrixesp.metrics;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import pucp.edu.cohmetrixesp.structs.CohText;

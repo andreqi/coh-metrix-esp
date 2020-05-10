@@ -13,7 +13,6 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
-import pucp.edu.cohmetrixesp.metrics.DescriptiveAnalyzer;
 import pucp.edu.cohmetrixesp.metrics.RefCohesionAnalyzer;
 import pucp.edu.cohmetrixesp.structs.CohText;
 import pucp.edu.cohmetrixesp.utils.IFreelingAnalyzer;

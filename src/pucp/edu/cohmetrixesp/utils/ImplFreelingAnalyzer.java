@@ -32,16 +32,16 @@ public class ImplFreelingAnalyzer implements IFreelingAnalyzer {
 	}
 
 	private ImplFreelingAnalyzer() {
-		System.loadLibrary("freeling_javaAPI");
+		
+		NativeUtils.loadLibrary("freeling_javaAPI");   
+		
 		Util.initLocale("default");
 		MacoOptions op = new MacoOptions(LANG);
-		op.setActiveModules(false, true, true, true, true, true, true, true,
-				true, true);
-
-		op.setDataFiles("", DATA + LANG + "/locucions.dat", DATA + LANG
-				+ "/quantities.dat", DATA + LANG + "/afixos.dat", DATA + LANG
-				+ "/probabilitats.dat", DATA + LANG + "/dicc.src", DATA + LANG
-				+ "/np.dat", DATA + "common/punct.dat");
+		op.setDataFiles("", DATA + "common/punct.dat", DATA + LANG + "/dicc.src",
+				DATA + LANG + "/afixos.dat", "",
+				DATA + LANG + "/locucions.dat", DATA + LANG + "/np.dat",
+				DATA + LANG + "/quantities.dat", DATA + LANG
+				+ "/probabilitats.dat");
 		// Create analyzers.
 		mf = new Maco(op);
 

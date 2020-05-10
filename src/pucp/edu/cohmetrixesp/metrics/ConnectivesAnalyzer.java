@@ -1,19 +1,15 @@
 package pucp.edu.cohmetrixesp.metrics;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.upc.freeling.ListSentence;
-import edu.upc.freeling.Sentence;
 import pucp.edu.cohmetrixesp.structs.CohParagraph;
 import pucp.edu.cohmetrixesp.structs.CohText;
-import pucp.edu.test.DescriptiveAnalyzerTest;
 
 public class ConnectivesAnalyzer implements ICohAnalyzer {
 	static String ALL_CONECTIVES_INCIDENCE = "CNCAll" ;
@@ -32,7 +28,7 @@ public class ConnectivesAnalyzer implements ICohAnalyzer {
 	private String TEMPORAL_TAG = "T" ;
 	private String ADDITIVE_TAG = "P" ;
 	
-	static String connectivesPath = "./tagsets/tagset-es-connectives.txt" ;
+	static String connectivesPath = "/tagset-es-connectives.txt" ;
 	private String punctuation = "[.|¿|?|¡|!|,|(|)|—|-]" ;
 	
 	static double INCIDENCE = 1000. ;
@@ -84,35 +80,35 @@ public class ConnectivesAnalyzer implements ICohAnalyzer {
 	
 	public double causalConnectivesIncidence( CohText text ){
 		Set<String> st = rules.keySet() ;
-		Set<String> causal = new HashSet() ;
+		Set<String> causal = new HashSet<String>() ;
 		for( String key : st ) if( rules.get( key ).contains( CAUSAL_TAG ) ) causal.add( key ) ;
 		return countConnectives( causal , text ) ;
 	}
 	
 	public double logicalConnectivesIncidence( CohText text ){
 		Set<String> st = rules.keySet() ;
-		Set<String> logical = new HashSet() ;
+		Set<String> logical = new HashSet<String>() ;
 		for( String key : st ) if( rules.get( key ).contains( LOGICAL_TAG ) ) logical.add( key ) ;
 		return countConnectives( logical , text ) ;
 	}
 	
 	public double adversativeConnectivesIncidence( CohText text ){
 		Set<String> st = rules.keySet() ;
-		Set<String> adversative = new HashSet() ;
+		Set<String> adversative = new HashSet<String>() ;
 		for( String key : st ) if( rules.get( key ).contains( ADVERSATIVE_TAG ) ) adversative.add( key ) ;
 		return countConnectives( adversative , text ) ;
 	}
 	
 	public double temporalConnectivesIncidence( CohText text ){
 		Set<String> st = rules.keySet() ;
-		Set<String> temporal = new HashSet() ;
+		Set<String> temporal = new HashSet<String>() ;
 		for( String key : st ) if( rules.get( key ).contains( TEMPORAL_TAG ) ) temporal.add( key ) ;
 		return countConnectives( temporal , text ) ;
 	}
 	
 	public double additiveConnectivesIncidence( CohText text ){
 		Set<String> st = rules.keySet() ;
-		Set<String> additive = new HashSet() ;
+		Set<String> additive = new HashSet<String>() ;
 		for( String key : st ) if( rules.get( key ).contains( ADDITIVE_TAG ) ) additive.add( key ) ;
 		return countConnectives( additive , text ) ;
 	}
@@ -129,7 +125,9 @@ public class ConnectivesAnalyzer implements ICohAnalyzer {
 		rules = new HashMap<String,String>() ;
 		String conn , type ;
 		try {
-			BufferedReader bf = new BufferedReader( new FileReader( connectivesPath ) ) ;
+			//BufferedReader bf = new BufferedReader( new FileReader( connectivesPath ) ) ;
+			InputStream res = ConnectivesAnalyzer.class.getResourceAsStream(connectivesPath);
+			BufferedReader bf = new BufferedReader( new InputStreamReader(res) ) ;
 			while( ( conn = bf.readLine() ) != null ){
 				type = bf.readLine() ;
 				rules.put( conn ,  type ) ;

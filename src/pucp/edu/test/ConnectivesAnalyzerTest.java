@@ -6,15 +6,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashSet;
 import java.util.Properties;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import pucp.edu.cohmetrixesp.metrics.ConnectivesAnalyzer;
-import pucp.edu.cohmetrixesp.metrics.DescriptiveAnalyzer;
 import pucp.edu.cohmetrixesp.structs.CohText;
 import pucp.edu.cohmetrixesp.utils.IFreelingAnalyzer;
 import pucp.edu.cohmetrixesp.utils.ImplFreelingAnalyzer;

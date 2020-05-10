@@ -3,7 +3,7 @@ package pucp.edu.cohmetrixesp.metrics;
 import java.util.Map;
 
 import edu.upc.freeling.Sentence;
-import edu.upc.freeling.TreeNode;
+import edu.upc.freeling.TreeOfNode;
 import edu.upc.freeling.Word;
 import pucp.edu.cohmetrixesp.structs.CohParagraph;
 import pucp.edu.cohmetrixesp.structs.CohText;
@@ -26,11 +26,11 @@ public class SyntacticComplexityAnalyzer implements ICohAnalyzer {
 		toFill.put(MODIFIERS_PER_NOUN_PHRASE, meanModifiersPerNP(text) );
 	}
 
-	private void countNodes(TreeNode node, int count[], String nodeTag, String [] words, boolean passed) {
+	private void countNodes(TreeOfNode node, int count[], String nodeTag, String [] words, boolean passed) {
 		long nch = node.numChildren();
 		if ( nch == 0) {
 			// hoja
-			Word w = node.getInfo().getWord();
+			Word w = node.begin().getWord();
 			if (!passed) return;
 			int add = 0;
 			String tag = w.getTag();
@@ -43,8 +43,8 @@ public class SyntacticComplexityAnalyzer implements ICohAnalyzer {
 			count[1] += add;
 			return ;
 		}
-		TreeNode child = null;
-		if (node.getInfo().getLabel().startsWith(nodeTag)) {
+		TreeOfNode child = null;
+		if (node.begin().getLabel().startsWith(nodeTag)) {
 			count[0] += 1;
 			passed = true;
 		}

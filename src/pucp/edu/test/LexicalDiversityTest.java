@@ -1,7 +1,5 @@
 package pucp.edu.test;
 
-import static org.junit.Assert.*;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pucp.edu.cohmetrixesp.metrics.LexicalDiversityAnalyzer;
-import pucp.edu.cohmetrixesp.metrics.RefCohesionAnalyzer;
 import pucp.edu.cohmetrixesp.metrics.SyntacticComplexityAnalyzer;
 import pucp.edu.cohmetrixesp.structs.CohText;
 import pucp.edu.cohmetrixesp.utils.IFreelingAnalyzer;

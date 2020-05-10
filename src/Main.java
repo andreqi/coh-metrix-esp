@@ -1,11 +1,12 @@
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 import pucp.edu.classifier.ComplexityClassifier;
 import pucp.edu.cohmetrixesp.metrics.MetricsEngine;
-import static spark.Spark.*;
-import spark.*;
-
 import com.google.gson.Gson;
 
 public class Main {
@@ -15,26 +16,27 @@ public class Main {
 		final MetricsEngine engine = MetricsEngine.getInstance();
 		final ComplexityClassifier classifier = ComplexityClassifier.getInstance();
 		
+		String inputFile = args[0]; 
 		
-	    post(new Route("/") {
-	         @Override
-	         public Object handle(Request request, Response response) {
-	        	// System.out.println(request.queryParams("text"));
-	        	 String texto = request.queryParams("text");
-	        	 Map<String, Map<String, Double>> ans = engine.analyzeClasified(texto);
-	        	 String class_ = classifier.classify(ans);
-	        	 Gson gson = new Gson();
-	        	 Map<String, Object> ret = new HashMap<String, Object> ();
-	        	 ret.put("metrics", ans);
-	        	 ret.put("class", class_);
-	        	 return gson.toJson(ret);
-	         }
-	    });
-	    
-		/*
-		 * engine.process(
-				"/home/andre/Dropbox/Coh-Metrix-Esp/Entregables/Tesis 2/Corpus/Lengua extranjera/txt",
-				"/home/andre/Desktop/2do Round - Lengua extrajera/");
-				*/
+		String inputText;
+		try {
+			inputText = Main.readFile(inputFile, Charset.defaultCharset());
+		}catch (IOException e) {
+			System.out.println("Error reading input file");
+			return;
+		}
+		
+	   	Map<String, Map<String, Double>> ans = engine.analyzeClasified(inputText);
+	   	String class_ = classifier.classify(ans);
+	   	Gson gson = new Gson();
+	   	Map<String, Object> ret = new HashMap<String, Object> ();
+	   	ret.put("metrics", ans);
+	   	ret.put("class", class_);
+	   	System.out.println(gson.toJson(ret));
+	}
+	
+	static String readFile(String path, Charset encoding) throws IOException {
+		byte[] encoded = Files.readAllBytes(Paths.get(path));
+		return new String(encoded, encoding);
 	}
 }

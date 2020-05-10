@@ -1,27 +1,15 @@
 package pucp.edu.test;
 
-import static org.junit.Assert.*;
-
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import pucp.edu.cohmetrixesp.metrics.DescriptiveAnalyzer;
 import pucp.edu.cohmetrixesp.metrics.WordInformationAnalyzer;
-import pucp.edu.cohmetrixesp.structs.CohParagraph;
-import pucp.edu.cohmetrixesp.structs.CohStats;
 import pucp.edu.cohmetrixesp.structs.CohText;
 import pucp.edu.cohmetrixesp.utils.IFreelingAnalyzer;
 import pucp.edu.cohmetrixesp.utils.ImplFreelingAnalyzer;

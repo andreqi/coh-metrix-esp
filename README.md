@@ -5,19 +5,25 @@
 
 **1. Install Freeling**
 
-For most of its Natural Laguage Processing needs, Coh-Metrix-Esp uses [Freeling](http://nlp.lsi.upc.edu/freeling/index.php). 
+For most of its Natural Language Processing needs, Coh-Metrix-Esp uses [Freeling](http://nlp.lsi.upc.edu/freeling/index.php). 
 
 If you are using Linux or Windows, follow the instructions [here](https://freeling-user-manual.readthedocs.io/en/latest/installation/installation-packages/) to install the library. 
 
-If you are using MacOS X, you can install Freeling using homebrew ([*How to install Homebrew?*](https://brew.sh/)):
+If you are using macOS, you can install Freeling using homebrew ([*How to install Homebrew?*](https://brew.sh/)):
 
 ```
 brew install freeling
 ```
 
-**2. Install Coh-Metrix-Esp**
+**2. Build the Freeling Java API**
 
-Download the `.jar` file that corresponds to your operating system.
+*If you are using macOS, you can skip this step since we already include the necessary library file.*
+
+This step is required for Coh-Metrix-Esp to be able to use Freeling's functionalities. Please, follow the appropriate instructions for [Windows](https://github.com/TALP-UPC/FreeLing/blob/master/APIs/java/README.Win.md) or [Linux](https://github.com/TALP-UPC/FreeLing/blob/master/APIs/java/README.Unix.md).
+
+**3. Download Coh-Metrix-Esp**
+
+Download the `coh-metrix-esp.jar` file.
 
 ## Running Coh-Metrix-Esp
 
@@ -43,9 +49,11 @@ Coh-Metrix-Esp is licenced under [Affero GPL](https://www.gnu.org/licenses/agpl-
 
 If you use Coh-Metrix-Esp in your research, please cite [Coh-Metrix-Esp: A Complexity Analysis Tool for Documents Written in Spanish](https://www.aclweb.org/anthology/L16-1745/).
 
-```
-Andre Quispersaravia, Walter Perez, Marco Sobrevilla and Fernando Alva-Manchego. 2016. Coh-Metrix-Esp: A Complexity Analysis Tool for Documents Written in Spanish. In Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC’16), pages 4694-4698, Portorož, Slovenia. European Language Resources Association (ELRA).
-```
+
+> Andre Quispersaravia, Walter Perez, Marco Sobrevilla and Fernando Alva-Manchego. 2016. 
+> Coh-Metrix-Esp: A Complexity Analysis Tool for Documents Written in Spanish. 
+> In Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC’16), pages 4694-4698, Portorož, Slovenia. 
+> European Language Resources Association (ELRA).
 
 ```
 @inproceedings{quispesaravia-etal-2016-coh,

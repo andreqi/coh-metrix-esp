@@ -9,11 +9,7 @@ For most of its Natural Language Processing needs, Coh-Metrix-Esp uses [Freeling
 
 If you are using Linux or Windows, follow the instructions [here](https://freeling-user-manual.readthedocs.io/en/latest/installation/installation-packages/) to install the library. 
 
-If you are using macOS, you can install Freeling using homebrew ([*How to install Homebrew?*](https://brew.sh/)):
-
-```
-brew install freeling
-```
+If you are using macOS, you can install Freeling using homebrew ([*How to install Homebrew?*](https://brew.sh/)): `brew install freeling`
 
 **2. Build the Freeling Java API**
 

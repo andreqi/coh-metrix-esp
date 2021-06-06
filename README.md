@@ -26,16 +26,26 @@ Download the `coh-metrix-esp.jar` file.
 Once Coh-Metrix-Esp has been installed, you can run it in the command-line using:
 
 ```
-java -jar coh-metrix-esp.jar <input_text_file>
+java -jar coh-metrix-esp.jar -i <input_text_file> [-o <output_json_file>]
 ```
 
 For example:
 
 ```
-java -jar coh-metrix-esp.jar testfiles/mediumFile.txt
+java -jar coh-metrix-esp.jar -i testfiles/smallFile.txt
 ```
 
-A file `output.json` will be created with the values for all indices.
+This command will compute the metrics for `testfiles/smallFile.txt` and save them by default in a file named `output.json`.
+
+
+If you want to specify a file and location for the output file, you can use the `-o, --outputFile` option:
+
+```
+java -jar coh-metrix-esp.jar -i testfiles/smallFile.txt -o /path/to/metricsSmallFile.json
+```
+
+This command will compute the metrics for `testfiles/smallFile.txt` and save them in `/path/to/metrics_for_small_file.json`.
+
 
 ## Licence
 

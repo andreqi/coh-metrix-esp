@@ -1,3 +1,3 @@
-este es un archivo de prueba. tomar en cuenta que el archivo tiene un cambio de linea que delimita un parrafo.
+Este es un archivo de prueba. Tomar en cuenta que el archivo tiene un cambio de linea que delimita un párrafo.
 
-entonces este archivo tiene 2 parrafos.
+Entonces este archivo tiene 2 párrafos.

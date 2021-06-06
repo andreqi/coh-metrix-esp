@@ -23,6 +23,8 @@ public class WordInformationAnalyzer implements ICohAnalyzer{
 
 	static double INCIDENCE = 1000. ;
 	
+	private DescriptiveAnalyzer desc = DescriptiveAnalyzer.getInstance();
+	
 	static WordInformationAnalyzer instance;
 	
 	public static WordInformationAnalyzer getInstance() {
@@ -31,6 +33,7 @@ public class WordInformationAnalyzer implements ICohAnalyzer{
 	}
 	
 	private WordInformationAnalyzer() {}
+	
 
 	@Override
 	public void analyze(Map<String, Double> toFill, CohText text) {
@@ -70,70 +73,70 @@ public class WordInformationAnalyzer implements ICohAnalyzer{
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "N" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double verbIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "V" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double adjectiveIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "A" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double adverbIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "R" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double pronounIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "PP" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double firstPersonSingularPronounIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "PP1.S" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double firstPersonPluralPronounIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "PP1.P" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double secondPersonPronounIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "PP2" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double thirdPersonSingularPronounIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "PP3.S" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double thirdPersonPluralPronounIncidence( CohText text ){
 		List<CohParagraph> paragraphs = text.getParagraphs() ;
 		double ans = 0.0 ;
 		for( CohParagraph p : paragraphs ) ans += countWordsByTag( p , "PP3.P" ) ;
-		return ans / INCIDENCE ;
+		return ans * INCIDENCE / desc.numberOfWords(text);
 	}
 	
 	public double countWordsByTag( CohParagraph p , String tag ){

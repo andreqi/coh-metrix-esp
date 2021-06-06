@@ -35,6 +35,8 @@ public class ConnectivesAnalyzer implements ICohAnalyzer {
 	
 	private HashMap<String, String> rules ;
 	
+	private DescriptiveAnalyzer desc = DescriptiveAnalyzer.getInstance();
+	
 	static ConnectivesAnalyzer instance ;
 	
 	public static ConnectivesAnalyzer getInstance(){
@@ -152,8 +154,7 @@ public class ConnectivesAnalyzer implements ICohAnalyzer {
 				}
 			}
 		}
-		resp /= INCIDENCE ;
-		return resp ;
+		return resp * INCIDENCE / desc.numberOfWords(text);
 	}
 
 }

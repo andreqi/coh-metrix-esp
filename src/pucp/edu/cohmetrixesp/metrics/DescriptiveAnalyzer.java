@@ -53,7 +53,7 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 		
 		ans = lengthOfParagraphs(text);
 		toFill.put(PARAGRAPH_LENGTH_MEAN, ans.getMean());
-		toFill.put(PARAGRAPH_LENGTH_MEAN, ans.getStdDeviation());
+		toFill.put(PARAGRAPH_LENGTH_DEV, ans.getStdDeviation());
 		
 		ans = numberOfWordsInSentences(text);
 		toFill.put(NUMBER_OF_WORDS_IN_SENTECES_MEAN, ans.getMean());
@@ -141,7 +141,7 @@ public class DescriptiveAnalyzer implements ICohAnalyzer{
 		CohStats ans = new CohStats();
 		DescriptiveStatistics desc = new DescriptiveStatistics();
 		for (CohParagraph p: text) {
-			desc.addValue(p.length());
+			desc.addValue(numberOfSentences(p));
 		}
 		ans.setMean(desc.getMean());
 		ans.setStdDeviation(desc.getStandardDeviation());

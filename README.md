@@ -35,10 +35,10 @@ For example:
 java -jar coh-metrix-esp.jar -i testfiles/smallFile.txt
 ```
 
-This command will compute the metrics for `testfiles/smallFile.txt` and save them by default in a file named `output.json`.
+This command will compute the metrics for `testfiles/smallFile.txt` and save them in a file named `output.json` by default.
 
 
-If you want to specify a file and location for the output file, you can use the `-o, --outputFile` option:
+If you want to specify a name and location for the output file, you can use the `-o, --outputFile` option:
 
 ```
 java -jar coh-metrix-esp.jar -i testfiles/smallFile.txt -o /path/to/metricsSmallFile.json

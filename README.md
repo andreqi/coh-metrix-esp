@@ -44,7 +44,7 @@ If you want to specify a name and location for the output file, you can use the 
 java -jar coh-metrix-esp.jar -i testfiles/smallFile.txt -o /path/to/metricsSmallFile.json
 ```
 
-This command will compute the metrics for `testfiles/smallFile.txt` and save them in `/path/to/metrics_for_small_file.json`.
+This command will compute the metrics for `testfiles/smallFile.txt` and save them in `/path/to/metricsSmallFile.json`.
 
 
 ## Licence

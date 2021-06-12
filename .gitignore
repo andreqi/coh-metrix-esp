@@ -60,3 +60,6 @@ local.properties
 #.project
 /target/
 /.DS_Store
+
+# Exclude dataset
+corpora

@@ -1,5 +1,5 @@
 # Coh-Metrix-Esp
-[**Coh-Metrix-Esp**](https://www.aclweb.org/anthology/L16-1745/) is a Spanish version of [Coh-Metrix](http://cohmetrix.com/), able to calculate **45 readability indices** based on psycholingistics metrics of text cohesion and coherence. 
+Coh-Metrix-Esp is a version of [Coh-Metrix](http://cohmetrix.com/) for Spanish. It can calculate **45 readability indices** based on psycholingistics metrics of text cohesion and coherence. 
 
 ## Installation
 
@@ -53,12 +53,12 @@ Coh-Metrix-Esp is licenced under [Affero GPL](https://www.gnu.org/licenses/agpl-
 
 ## Citation
 
-If you use Coh-Metrix-Esp in your research, please cite [Coh-Metrix-Esp: A Complexity Analysis Tool for Documents Written in Spanish](https://www.aclweb.org/anthology/L16-1745/).
+If you use Coh-Metrix-Esp in your research, please cite:
 
 
 > Andre Quispersaravia, Walter Perez, Marco Sobrevilla and Fernando Alva-Manchego. 2016. 
-> Coh-Metrix-Esp: A Complexity Analysis Tool for Documents Written in Spanish. 
-> In Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC’16), pages 4694-4698, Portorož, Slovenia. 
+> [Coh-Metrix-Esp: A Complexity Analysis Tool for Documents Written in Spanish](https://aclanthology.org/L16-1745/).
+> In *Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC’16)*, pages 4694-4698, Portorož, Slovenia. 
 > European Language Resources Association (ELRA).
 
 ```

@@ -1,3 +1,7 @@
+# NO LONGER BEING MAINTAINED!
+Unfortunately, this tool is no longer being maintained. We might work on a more general multilingual tool in the future. We thank all our users.
+
+
 # Coh-Metrix-Esp
 Coh-Metrix-Esp is a version of [Coh-Metrix](http://cohmetrix.com/) for Spanish. It can calculate **45 readability indices** based on psycholingistics metrics of text cohesion and coherence. 
 

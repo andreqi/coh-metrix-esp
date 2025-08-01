@@ -1,5 +1,5 @@
 # NO LONGER BEING MAINTAINED!
-Unfortunately, this tool is no longer being maintained. We might work on a more general multilingual tool in the future. We thank all our users.
+Unfortunately, this tool is no longer being maintained. We thank all our users. We recommend that you use https://github.com/iapucp/pucp-metrix.
 
 
 # Coh-Metrix-Esp
